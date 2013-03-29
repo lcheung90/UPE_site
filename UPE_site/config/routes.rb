@@ -1,4 +1,28 @@
 UPESite::Application.routes.draw do
+  resources :courses
+
+  resources :opinions
+
+  resources :comments
+
+  resources :ratings
+
+  resources :answers
+
+  resources :tags
+
+  resources :taggings
+
+  resources :questions
+
+  resources :solves
+
+  resources :enquiries
+
+  resources :users
+
+  resources :ideas
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
