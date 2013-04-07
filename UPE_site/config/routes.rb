@@ -18,7 +18,11 @@ UPESite::Application.routes.draw do
                                   :new, 
                                   :destroy]
 
-  root :to =>"public_pages#home"
+  match 'signup'  => "users#new"
+  root  :to       => "public_pages#home"
+  match 'login'    => "sessions#new"
+  match 'sessions' => "sessions#create",  :via => :post
+  match 'logout'   => "sessions#destroy", :via => :delete  
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
