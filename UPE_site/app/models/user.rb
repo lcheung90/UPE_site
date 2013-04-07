@@ -10,5 +10,5 @@ class User < ActiveRecord::Base
 						 :uniqueness => true
 	has_many :questions
 	has_many :answers
-	attr_accessible :email, :name, :password_digest, :password_confirmation, :username
+	attr_accessible :email, :name, :password_digest, :username
 end
