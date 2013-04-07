@@ -1,27 +1,22 @@
 UPESite::Application.routes.draw do
-  resources :courses
+  resources :courses, :except => [:index,
+                                  :new, 
+                                  :destroy]
 
-  resources :opinions
+  resources :tags,      :only   => [:index,
+                                    :show]
 
-  resources :comments
+  #resources :questions
+  resources :questions, :except => [:index] do
+    get 'popular', :on => :collection
 
-  resources :ratings
+    resources :taggings, :only => [:create, 
+                                   :destroy]
+  end
 
-  resources :answers
-
-  resources :tags
-
-  resources :taggings
-
-  resources :questions
-
-  resources :solves
-
-  resources :enquiries
-
-  resources :users
-
-  resources :ideas
+  resources :users, :except => [:index,
+                                  :new, 
+                                  :destroy]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
