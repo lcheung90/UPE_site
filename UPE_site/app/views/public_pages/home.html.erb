@@ -1,0 +1,102 @@
+<!--<html>
+	<head>
+		<title></title>
+		<%= csrf_meta_tags %>
+		<% stylesheet_link_tag "reset", :media => "all"%>
+		<% stylesheet_link_tag "bootstrap", :media => "all"%>
+		<% stylesheet_link_tag "t", :media => "all"%>-->
+		<!--
+		<link rel="stylesheet" type="text/css" href="css/reset.css">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="css/t.css">
+		<link href='http://fonts.googleapis.com/css?family=Cabin:400,700' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Droid+Serif' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+	</head>
+	<body>-->
+		<div class="navbar navbar-fixed-top">
+		   <div class="navbar-inner">
+		     <section class="container">
+		       <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+		         <span class="icon-bar"></span>
+		         <span class="icon-bar"></span>
+		         <span class="icon-bar"></span>
+		       </a>
+		       <a class="brand" href="../">UPE</a>
+		       <div class="nav-collapse collapse" id="main-menu">
+		        <ul class="nav" id="main-menu-left">
+		          <li><a onclick="pageTracker._link(this.href); return false;" href="http://news.bootswatch.com">About</a></li>
+		          <li class="dropdown">
+		            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Student Services <b class="caret"></b></a>
+		            <ul class="dropdown-menu" id="swatch-menu">
+		              <li><a href="../default">Default</a></li>
+		              <li class="divider"></li>
+		              <li><a href="../amelia">Amelia</a></li>
+		              <li><a href="../cerulean">Cerulean</a></li>
+		              <li><a href="../cosmo">Cosmo</a></li>
+		            </ul>
+		          </li>
+		          <li><a onclick="pageTracker._link(this.href); return false;" href="http://news.bootswatch.com">Events</a></li>
+		        </ul>
+		        <ul class="nav pull-right" id="main-menu-right">
+		          <li class ="dropdown" data-dropdown="dropdown">
+		          	<a href = "#" id ="login" class="dropdown-toggle">Register</a>
+		          </li>
+		          <li class ="dropdown" >
+		          	<a href = "#" id ="login" class="dropdown-toggle" data-toggle="dropdown" href="#">Login</a>
+		          	<div class="dropdown-menu">
+		          		<form name ="login" action="users/joe_user.html" method="get">
+							<p class ="login">Username: <input required type="text" name="user" /></p>
+							<p class ="login">Password: <input required type="password" name="password" /></p>
+                            <p class ="login"><a href ="#">Forgot password</a>
+							<p class ="login"><input type="submit" value="Log in" class ="btn btn-primary"></p>
+						</form>
+		          	</div>
+		          </li>
+		        </ul>
+		       </div>
+		     </section>
+		   </div>
+		 </div>
+		 <section class = "container">
+		 	<div class ="page-header">
+			 	<h1>Welcome to UPE, Chico Chapter</h1>
+			 </div>
+			 	<p>
+			 		UPE is the honor society for the computing and information sciences. Here you will find information about
+			 		our members, events and services.
+			 	</p>
+			 	<div class ="span8">
+			 	<h2>Services</h2>
+			 	<dl>
+			 		<dt>In-Lab Tutoring</dt>
+			 			<dd>
+			 				we provide assistance finding/debugging assignments during lab periods.
+			 			</dd>
+			 		<dt>Peer-Tutoring</dt>
+			 			<dd>
+			 				we provide personalized tutoring sessions.
+			 			</dd>
+			 		<dt>Online Question/Answer*</dt>
+			 			<dd>
+			 				we provide a open microblogging style question and answer forum, where you can ask/answer Computer Science related questions.
+			 			</dd>
+			 		<dt>Online Tutoring*</dt>
+			 			<dd>
+			 				we provide assistance finding/debugging assignments through a online collaborative text editor.
+			 			</dd>
+			 	</dl>
+			 	<p>
+			 		<b>*</b>Tutor availability is subject to change without notice
+			 	</p>
+			 </div>
+			 <div class="span3">
+			 	<img src="img/key_vectorized.png">
+			 </div>
+		</section>
+		<!--<% javascript_include_tag "bootstrap.min.js" %>
+	    <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+	    <script src="js/bootstrap.min.js"></script>
+	    <script src="js/bootswatch.js"></script>
+	</body>
+</html>-->

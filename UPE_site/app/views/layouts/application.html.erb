@@ -2,13 +2,15 @@
 <html>
 <head>
   <title>UPESite</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
+  <%= stylesheet_link_tag "bootstrap", :media => "all" %>
+  <%= stylesheet_link_tag "t", :media => "all" %>
+  
   <%= csrf_meta_tags %>
 </head>
 <body>
 
 <%= yield %>
-
+<%= javascript_include_tag "application" %>
+<%= javascript_include_tag "bootstrap" %>
 </body>
 </html>

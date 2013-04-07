@@ -18,6 +18,8 @@ UPESite::Application.routes.draw do
                                   :new, 
                                   :destroy]
 
+  root :to =>"public_pages#home"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
