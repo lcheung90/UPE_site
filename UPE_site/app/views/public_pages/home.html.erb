@@ -29,12 +29,12 @@
 		          <li class ="dropdown" >
 		          	<a href = "#" id ="login" class="dropdown-toggle" data-toggle="dropdown" href="#">Login</a>
 		          	<div class="dropdown-menu">
-		          		<form name ="login" action="users/joe_user.html" method="get">
-							<p class ="login">Username: <input required type="text" name="user" /></p>
-							<p class ="login">Password: <input required type="password" name="password" /></p>
-                            <p class ="login"><a href ="#">Forgot password</a>
-							<p class ="login"><input type="submit" value="Log in" class ="btn btn-primary"></p>
-						</form>
+						<%= form_for :session, :html => { :class => "form-inline" } do |f| %>
+						  <p class ="login"><%= f.text_field :username,:placeholder => "Username" %></p>
+						  <p class ="login"><%= f.password_field :password,:placeholder => "Password" %></p>
+						  <p class ="login"><a href ="#">Forgot password</a>
+						  <p class ="login"><%= f.submit "Login", :class => "btn-primary pull-right" %></p>
+						<%end%>
 		          	</div>
 		          </li>
 		        </ul>
