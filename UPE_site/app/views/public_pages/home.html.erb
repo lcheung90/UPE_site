@@ -24,10 +24,10 @@
 		        </ul>
 		        <ul class="nav pull-right" id="main-menu-right">
 		          <li class ="dropdown" data-dropdown="dropdown">
-		          	<a href = "#" id ="login" class="dropdown-toggle">Register</a>
+		          	<%= link_to "Sign up", signup_path,:class=>"dropdown-toggle"%>
 		          </li>
 		          <li class ="dropdown" >
-		          	<a href = "#" id ="login" class="dropdown-toggle" data-toggle="dropdown" href="#">Login</a>
+		          	<%= link_to "Login", "#", :data=>{:toggle=>"dropdown"}, :class=>"dropdown-toggle"%>
 		          	<div class="dropdown-menu">
 						<%= form_for :session, :html => { :class => "form-inline" } do |f| %>
 						  <p class ="login"><%= f.text_field :username,:placeholder => "Username" %></p>
