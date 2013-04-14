@@ -13,7 +13,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @user = User.find(params[:id])
+    @user = User.find_by_username(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -44,11 +44,13 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render json: @user, status: :created, location: @user }
+        reset_session
+        session[:user_id] = @user.id
+        format.html { redirect_to @user.username, notice: 'User was successfully created.' }
+        #format.json { render json: @user, status: :created, location: @user }
       else
         format.html { render action: "new" }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        #format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -60,7 +62,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.html { redirect_to @user.username, notice: 'User was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -72,11 +74,11 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    @user = User.find(params[:id])
+    @user = User.find_by_username(params[:id])
     @user.destroy
 
     respond_to do |format|
-      format.html { redirect_to users_url }
+      format.html { redirect_to root_url }
       format.json { head :no_content }
     end
   end
