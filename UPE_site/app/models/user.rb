@@ -10,5 +10,6 @@ class User < ActiveRecord::Base
 						 :uniqueness => true
 	has_many :questions
 	has_many :answers
+	has_many :comments
 	attr_accessible :email, :name, :password_digest, :username
 end
