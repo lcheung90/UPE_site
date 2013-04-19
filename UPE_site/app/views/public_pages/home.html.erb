@@ -23,20 +23,27 @@
 		          <li><a onclick="pageTracker._link(this.href); return false;" href="http://news.bootswatch.com">Events</a></li>
 		        </ul>
 		        <ul class="nav pull-right" id="main-menu-right">
-		          <li class ="dropdown" data-dropdown="dropdown">
-		          	<%= link_to "Sign up", signup_path,:class=>"dropdown-toggle"%>
+		        	<% if @user != @current_user %>
+		        	<li class ="dropdown" data-dropdown="dropdown">
+		          	<%= link_to "Log out", logout_path,:class=>"dropdown-toggle"%>
+		          
+		          </li>
+		          <%else%>
+		          	<li class ="dropdown" data-dropdown="dropdown">
+		          	<%= link_to "Sign up", sign_up_path,:class=>"dropdown-toggle"%>
 		          </li>
 		          <li class ="dropdown" >
 		          	<%= link_to "Login", "#", :data=>{:toggle=>"dropdown"}, :class=>"dropdown-toggle"%>
 		          	<div class="dropdown-menu">
-						<%= form_for :session, :html => { :class => "form-inline" } do |f| %>
-						  <p class ="login"><%= f.text_field :username,:placeholder => "Username" %></p>
-						  <p class ="login"><%= f.password_field :password,:placeholder => "Password" %></p>
+						<%= form_tag sessions_path do %>
+						  <p class ="login"><%= text_field_tag :username,nil,:placeholder => "Username" %></p>
+						  <p class ="login"><%= password_field_tag :password_digest,nil,:placeholder => "Password" %></p>
 						  <p class ="login"><a href ="#">Forgot password</a>
-						  <p class ="login"><%= f.submit "Login", :class => "btn-primary pull-right" %></p>
+						  <p class ="login"><%= submit_tag "Login", :class => "btn-primary pull-right" %></p>
 						<%end%>
 		          	</div>
 		          </li>
+		          <%end%>
 		        </ul>
 		       </div>
 		     </section>
