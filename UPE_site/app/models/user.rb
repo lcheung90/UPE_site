@@ -12,4 +12,8 @@ class User < ActiveRecord::Base
 	has_many :answers
 	has_many :comments
 	attr_accessible :email, :name, :password, :username
+
+	def to_param
+		username
+	end
 end

@@ -46,6 +46,18 @@
                         </li>
                         <li class ="dropdown" >
                             <%= link_to "Login", "#", :data=>{:toggle=>"dropdown"}, :class=>"dropdown-toggle"%>
+
+                            <div class="dropdown-menu">
+                                <%= form_for :session, :url => { :controller => 'sessions', :action => 'create'} do |u| %>
+                                <%= u.label :username, :required => true%>
+                                <%= u.text_field :username, :required => true %>
+                                <%= u.label :password, :required => true%>
+                                <%= u.password_field :password, :required => true %>
+                                <%= u.submit "Log in", :class => "btn-primary pull-right"%>
+                                <%end%>
+                            </div>
+
+                            <!--
                             <div class="dropdown-menu">
                                 <%= form_tag sessions_path do %>
                                 <p class ="login"><%= text_field_tag :username,nil,:placeholder => "Username" %></p>
@@ -54,6 +66,7 @@
                                 <p class ="login"><%= submit_tag "Login", :class => "btn-primary pull-right" %></p>
                                 <%end%>
                             </div>
+                        -->
                         </li>
                     <%end%>
                     </ul>
