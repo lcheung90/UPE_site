@@ -1,24 +1,76 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>UPESite</title>
-  <%= stylesheet_link_tag "bootstrap", :media => "all" %>
-  <%= stylesheet_link_tag "t", :media => "all" %>
-  
-  <%= csrf_meta_tags %>
-</head>
-<body>
-	<section class = "container">
-		<% if flash[:notice] %>
-			<div>
-				<p class="flash">
-					<%=flash[:notice] %>
-				</p>
-			</div>
-		<%end%>
-		<%= yield %>
-	</section>
-<%= javascript_include_tag "application" %>
-<%= javascript_include_tag "bootstrap" %>
-</body>
+    <head>
+        <title>UPESite</title>
+        <%= stylesheet_link_tag "bootstrap", :media => "all" %>
+        <%= stylesheet_link_tag "t", :media => "all" %>
+        <%= csrf_meta_tags %>
+    </head>
+    <body>
+        <div class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <section class="container">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <%= link_to "UPE", home_path, :class => "brand"%>
+                <div class="nav-collapse collapse" id="main-menu">
+                    <ul class="nav" id="main-menu-left">
+                        <li>
+                            <a>About</a>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Student Services <b class="caret"></b></a>
+                            <ul class="dropdown-menu" id="swatch-menu">
+                                <li><a href="../default">Default</a></li>
+                                <li class="divider"></li>
+                                <li><a href="../amelia">Amelia</a></li>
+                                <li><a href="../cerulean">Cerulean</a></li>
+                                <li><a href="../cosmo">Cosmo</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a>Events</a>
+                        </li>
+                    </ul>
+                    <ul class="nav pull-right" id="main-menu-right">
+                    <% if @user != @current_user %>
+                        <li class ="dropdown" data-dropdown="dropdown">
+                            <%= link_to "Log out", log_out_path,:class=>"dropdown-toggle"%>
+                        </li>
+                    <%else%>
+                        <li class ="dropdown" data-dropdown="dropdown">
+                            <%= link_to "Sign up", sign_up_path,:class=>"dropdown-toggle"%>
+                        </li>
+                        <li class ="dropdown" >
+                            <%= link_to "Login", "#", :data=>{:toggle=>"dropdown"}, :class=>"dropdown-toggle"%>
+                            <div class="dropdown-menu">
+                                <%= form_tag sessions_path do %>
+                                <p class ="login"><%= text_field_tag :username,nil,:placeholder => "Username" %></p>
+                                <p class ="login"><%= password_field_tag :password_digest,nil,:placeholder => "Password" %></p>
+                                <p class ="login"><a href ="#">Forgot password</a>
+                                <p class ="login"><%= submit_tag "Login", :class => "btn-primary pull-right" %></p>
+                                <%end%>
+                            </div>
+                        </li>
+                    <%end%>
+                    </ul>
+                </div>
+                </section>
+            </div>
+        </div>
+        <section class = "container">
+            <div>
+                <p class="flash">
+                    <%=flash[:notice] %>
+                </p>
+            </div>
+            <%=params.inspect%>
+            <%= yield %>
+        </section>
+        <%= javascript_include_tag "application" %>
+        <%= javascript_include_tag "bootstrap" %>
+    </body>
 </html>

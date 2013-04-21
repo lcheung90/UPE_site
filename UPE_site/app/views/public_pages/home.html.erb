@@ -1,87 +1,31 @@
-		<div class="navbar navbar-fixed-top">
-		   <div class="navbar-inner">
-		     <section class="container">
-		       <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-		         <span class="icon-bar"></span>
-		         <span class="icon-bar"></span>
-		         <span class="icon-bar"></span>
-		       </a>
-		       <a class="brand" href="../">UPE</a>
-		       <div class="nav-collapse collapse" id="main-menu">
-		        <ul class="nav" id="main-menu-left">
-		          <li><a onclick="pageTracker._link(this.href); return false;" href="http://news.bootswatch.com">About</a></li>
-		          <li class="dropdown">
-		            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Student Services <b class="caret"></b></a>
-		            <ul class="dropdown-menu" id="swatch-menu">
-		              <li><a href="../default">Default</a></li>
-		              <li class="divider"></li>
-		              <li><a href="../amelia">Amelia</a></li>
-		              <li><a href="../cerulean">Cerulean</a></li>
-		              <li><a href="../cosmo">Cosmo</a></li>
-		            </ul>
-		          </li>
-		          <li><a onclick="pageTracker._link(this.href); return false;" href="http://news.bootswatch.com">Events</a></li>
-		        </ul>
-		        <ul class="nav pull-right" id="main-menu-right">
-		        	<% if @user != @current_user %>
-		        	<li class ="dropdown" data-dropdown="dropdown">
-		          	<%= link_to "Log out", logout_path,:class=>"dropdown-toggle"%>
-		          
-		          </li>
-		          <%else%>
-		          	<li class ="dropdown" data-dropdown="dropdown">
-		          	<%= link_to "Sign up", sign_up_path,:class=>"dropdown-toggle"%>
-		          </li>
-		          <li class ="dropdown" >
-		          	<%= link_to "Login", "#", :data=>{:toggle=>"dropdown"}, :class=>"dropdown-toggle"%>
-		          	<div class="dropdown-menu">
-						<%= form_tag sessions_path do %>
-						  <p class ="login"><%= text_field_tag :username,nil,:placeholder => "Username" %></p>
-						  <p class ="login"><%= password_field_tag :password_digest,nil,:placeholder => "Password" %></p>
-						  <p class ="login"><a href ="#">Forgot password</a>
-						  <p class ="login"><%= submit_tag "Login", :class => "btn-primary pull-right" %></p>
-						<%end%>
-		          	</div>
-		          </li>
-		          <%end%>
-		        </ul>
-		       </div>
-		     </section>
-		   </div>
-		 </div>
-		 <section class = "container">
-		 	<div class ="page-header">
-			 	<h1>Welcome to UPE, Chico Chapter</h1>
-			 </div>
-			 	<p>
-			 		UPE is the honor society for the computing and information sciences. Here you will find information about
-			 		our members, events and services.
-			 	</p>
-			 	<div class ="span8">
-			 	<h2>Services</h2>
-			 	<dl>
-			 		<dt>In-Lab Tutoring</dt>
-			 			<dd>
-			 				we provide assistance finding/debugging assignments during lab periods.
-			 			</dd>
-			 		<dt>Peer-Tutoring</dt>
-			 			<dd>
-			 				we provide personalized tutoring sessions.
-			 			</dd>
-			 		<dt>Online Question/Answer*</dt>
-			 			<dd>
-			 				we provide a open microblogging style question and answer forum, where you can ask/answer Computer Science related questions.
-			 			</dd>
-			 		<dt>Online Tutoring*</dt>
-			 			<dd>
-			 				we provide assistance finding/debugging assignments through a online collaborative text editor.
-			 			</dd>
-			 	</dl>
-			 	<p>
-			 		<b>*</b>Tutor availability is subject to change without notice
-			 	</p>
-			 </div>
-			 <div class="span3">
-			 	<img src="img/key_vectorized.png">
-			 </div>
-		</section>
+<div class ="page-header">
+	<h1>Welcome to UPE, Chico Chapter</h1>
+</div>
+<p>
+	UPE is the honor society for the computing and information sciences. Here you will find information about
+	our members, events and services.
+</p>
+<div class ="span8">
+	<h2>Services</h2>
+	<dl>
+		<dt>In-Lab Tutoring</dt>
+			<dd>
+				we provide assistance finding/debugging assignments during lab periods.
+			</dd>
+		<dt>Peer-Tutoring</dt>
+			<dd>
+				we provide personalized tutoring sessions.
+			</dd>
+		<dt>Online Question/Answer*</dt>
+			<dd>
+				we provide a open microblogging style question and answer forum, where you can ask/answer Computer Science related questions.
+			</dd>
+		<dt>Online Tutoring*</dt>
+			<dd>
+				we provide assistance finding/debugging assignments through a online collaborative text editor.
+			</dd>
+	</dl>
+	<p>
+		<b>*</b>Tutor availability is subject to change without notice
+	</p>
+</div>
