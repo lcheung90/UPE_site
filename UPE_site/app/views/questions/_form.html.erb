@@ -1,4 +1,4 @@
-<%= form_for(@question) do |f| %>
+<%= form_for(@question, :html =>{:class => "form-horizontal well"}) do |f| %>
   <% if @question.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@question.errors.count, "error") %> prohibited this question from being saved:</h2>
@@ -11,19 +11,16 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_area :description %>
-  </div>
-  <div class="field">
-    <%= f.label :course_level_id %><br />
-    <%= f.number_field :course_level_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+  <legend>Ask a Question</legend>
+  <fieldset>
+    <div class="control-group">
+        <%= f.text_field :title, :cols => 250,:placeholder => "Title",:class=>"fill" %>
+    </div>
+    <div class="control-group">
+        <%= f.text_area :description, :rows => "10",:placeholder=> "Describe your problem here",:class=>"fill" %>
+    </div>
+    <div class="form-actions">
+      <%= f.submit "Submit Question", :class=>"btn btn-primary" %>
+      <%= f.submit "Cancel", :class=>"btn"%>
+    </div>
+<%end%>

@@ -1,46 +1,29 @@
 <p id="notice"><%= notice %></p>
 <h1>Username</h1>
-      <p><a data-toggle="modal" href="#example" class="btn btn-primary btn-large pull-right top-marg">Ask Question</a></p>
-      
-      <div id="example" class="modal hide" style="display: none; ">
-        <div class="modal-header">
-          <a class="close" data-dismiss="modal">×</a>
-          <h3>This is a Modal Heading</h3>
-        </div>
-        <div class="modal-body">
-          <h4>Text in a modal</h4>
-          <input class="modal-ta" type="text" id="username">
-          <p>
-           <textarea class="modal-ta" name="notes"> </textarea>
-          </p>            
-        </div>
-        <div class="modal-footer">
-          <a href="#" class="btn btn-success">Call to action</a>
-          <a href="#" class="btn" data-dismiss="modal">Close</a>
-        </div>
+<p>
+  <%=link_to "Ask Question" , new_question_path(params[:id],:user_id => @user),:class=>"btn btn-primary btn-large pull-right top-marg"%>
+</p>
+<div class="row">
+  <div class="span12">
+    <div class="row">
+      <div class="span3"><img src="img/key_vectorized.png"></div>
+      <div class="span9">
+        <p>
+          <b>Name:</b>
+          <%= @user.name %>
+        </p>
+        <p>
+          <b>Email:</b>
+          <%= @user.email %>
+        </p>
       </div>
-
-      <div class="row">
-        <div class="span12">
-          <div class="row">
-            <div class="span3"><img src="img/key_vectorized.png"></div>
-            <div class="span9">
-              <p>
-                <b>Name:</b>
-                <%= @user.name %>
-              </p>
-              <p>
-                <b>Email:</b>
-                <%= @user.email %>
-              </p>
-            </div>
-          </div>
-          <div class ="row">
-            <div class="span6"><h2>My Questions</h2></div>
-              <div class="span6"><h2>My Answers</h2></div>
-          </div>
-        </div>
-      </div>
+    </div>
+    <div class ="row">
+      <div class="span6"><h2>My Questions</h2></div>
+        <div class="span6"><h2>My Answers</h2></div>
+    </div>
+  </div>
+</div>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

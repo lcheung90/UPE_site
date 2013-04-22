@@ -10,4 +10,5 @@ UPESite::Application.routes.draw do
                                     :new, 
                                     :destroy]
   resources :sessions
+  resources :questions
 end
