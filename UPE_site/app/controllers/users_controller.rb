@@ -16,5 +16,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by_username(params[:id])
+    @questions = Question.find_all_by_user_id(@user.id)
+    @answers = Question.find_all_by_user_id(@user.id)
   end
 end

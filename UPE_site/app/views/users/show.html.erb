@@ -19,8 +19,19 @@
       </div>
     </div>
     <div class ="row">
-      <div class="span6"><h2>My Questions</h2></div>
-        <div class="span6"><h2>My Answers</h2></div>
+      <div class="span6">
+        <h2>My Questions</h2>
+        <%if @questions%>
+          <% @questions.each do |entry| %>
+            <section>
+              <%= link_to entry[:title], question_path(entry[:id])%>
+            </section>
+          <%end%>
+        <%end%>
+      </div>
+      <div class="span6">
+        <h2>My Answers</h2>
+      </div>
     </div>
   </div>
 </div>
