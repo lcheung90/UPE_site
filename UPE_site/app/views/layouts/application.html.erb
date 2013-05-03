@@ -22,7 +22,7 @@
                         <%= link_to "UPE", root_path, :class => "brand"%><%end%>
                     <%else%>
                         <% if @current_user %>
-                            <%= link_to "UPE", user_path(params[:user_id]), :class => "brand"%>
+                            <%= link_to "UPE", user_path(@current_user.username), :class => "brand"%>
                         <%end%>
                     <%end%>
                 <div class="nav-collapse collapse" id="main-menu">
