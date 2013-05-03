@@ -31,6 +31,15 @@
       </div>
       <div class="span6">
         <h2>My Answers</h2>
+        <% if @user.answers.any? %>
+  <ul>
+    <% @user.answers.each do |a| %>
+      <li><%= link_to a.question.title, question_path(a.question, :anchor => a.id) %></li>
+    <% end %>
+  </ul>
+<% else %>
+  User hasn't answered any questions yet
+<% end %>
       </div>
     </div>
   </div>

@@ -14,7 +14,15 @@
   <b>Course level:</b>
   <%= @question.course_level_id %>
 </p>
-
+<h2>Answers</h2>
+<%if @question.answers.any?%>
+	<% @question.answers.each do |a|%>
+		<p><%=a.solution%></p>
+	<%end%>
+<%end%>
+<% if @current_user %>
+  <%= render :template => 'answers/new' %>
+  <%end%>
 
 <%= link_to 'Edit', edit_question_path(@question) %> |
 <%= link_to 'Back', questions_path %>

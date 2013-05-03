@@ -40,11 +40,17 @@ class AnswersController < ApplicationController
   # POST /answers
   # POST /answers.json
   def create
-    @answer = Answer.new(params[:answer])
+    @question = Question.find(params[:question_id])
+
+    if !@question
+      redirect_to :controller => :questions, :action => "show", :id => params[:question_id]
+    end
+    @answer = @question.answers.build(params[:answer])
+    @answer.user_id = @current_user.id
 
     respond_to do |format|
       if @answer.save
-        format.html { redirect_to @answer, notice: 'Answer was successfully created.' }
+        format.html { redirect_to @question, notice: 'Answer was successfully created.' }
         format.json { render json: @answer, status: :created, location: @answer }
       else
         format.html { render action: "new" }
