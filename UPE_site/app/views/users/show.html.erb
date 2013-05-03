@@ -21,7 +21,7 @@
     <div class ="row">
       <div class="span6">
         <h2>My Questions</h2>
-        <%if @questions%>
+        <%if @questions.any?%>
           <% @questions.each do |entry| %>
             <section>
               <%= link_to entry[:title], question_path(entry[:id])%>
