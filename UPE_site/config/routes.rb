@@ -1,6 +1,4 @@
 UPESite::Application.routes.draw do
-  get "public_pages/home", :as => "home"
-
   get "log_in" => "sessions#new", :as => "log_in"
   get "log_out" => "sessions#destroy", :as => "log_out"
   get "sign_up" => "users#new", :as => "sign_up"
@@ -10,5 +8,7 @@ UPESite::Application.routes.draw do
                                     :new, 
                                     :destroy]
   resources :sessions
-  resources :questions
+  resources :questions do
+    resources :answers
+  end
 end

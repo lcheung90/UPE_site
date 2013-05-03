@@ -1,5 +1,13 @@
 <h1>New answer</h1>
 
-<%= render 'form' %>
+<%= render :partial => "answers/form", 
+           :locals => { 
+              :answer_form_options => {
+                :url => question_answers_path(@question),
+                :html => {
+                  :class => "form-horizontal well"
+                }
+              }
+            } %>
 
-<%= link_to 'Back', answers_path %>
+

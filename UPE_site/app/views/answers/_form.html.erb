@@ -1,4 +1,4 @@
-<%= form_for(@answer) do |f| %>
+<%= form_for(@answer,answer_form_options) do |f| %>
   <% if @answer.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@answer.errors.count, "error") %> prohibited this answer from being saved:</h2>
@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :solution %><br />
-    <%= f.text_area :solution %>
+    <%= f.text_area :solution, :rows => "10",:placeholder=> "Write your solution here",:class=>"fill"%>
   </div>
   <div class="actions">
     <%= f.submit %>
