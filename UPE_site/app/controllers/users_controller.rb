@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     if @user.save
       UserMailer.registration_confirmation(@user).deliver
       reset_session
-      session[:user_id] = @user_id
+      session[:user_id] = @user.id
       redirect_to user_url(@user.username), :notice => "Thanks for signing up!  A confirmation email has been sent."
     else
       render "new"
