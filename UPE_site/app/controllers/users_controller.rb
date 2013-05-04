@@ -9,9 +9,10 @@ class UsersController < ApplicationController
       redirect_to root_url and return
     end
     if @user.save
+      UserMailer.registration_confirmation(@user).deliver
       reset_session
       session[:user_id] = @user_id
-      redirect_to user_url(@user.username), :notice => "Signed up"
+      redirect_to user_url(@user.username), :notice => "Thanks for signing up!  A confirmation email has been sent."
     else
       render "new"
     end
