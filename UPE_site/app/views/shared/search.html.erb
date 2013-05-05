@@ -1,0 +1,68 @@
+<h2>Search results for <em><%=params[:search]%></em></h2>
+
+<h3>Tags</h3>
+<% if @tags.any? %>
+<table class="table table-hover">
+	<% @tags.each do |t| %>
+	<tr>
+		<%= link_to t.name, tag_path(t), :class=>"badge badge-inverse" %>
+		<span/>
+	</tr>
+	<% end %>
+</table>
+<%else%>
+<p>No tags match search criteria</p>
+<%end%>
+
+<h3>Questions</h3>
+<%if @questions.any?%>
+<div class ="row">
+	<% @questions.each do |question| %>
+	<div class ="span1">
+		<%= question.score%>
+		hotness
+	</div>
+	<div class ="span1">
+		<%= question.answers.count%>
+		answers
+	</div>
+	<div class ="span1">
+		<%= question.view_count%>
+		views
+	</div>
+	<div class ="row">
+		<div class ="span9">
+			<%= link_to question[:title], question_path(question, :id =>question.id)%>
+			<ul class = "tags">
+				<% question.tags.order(:id).zip(question.taggings).each do |tag,tagging|%>
+				<li>
+					<%= link_to tag.name, tag_path(tag.name),:class => "badge badge-inverse"%>
+				</li>
+				<%end%>
+			</ul>
+			<div class ="span9 pull-right">
+				created by: <%=link_to question.user.username, user_path(question.user.username)%>
+				(<%=question.created_at.strftime("%d %b %Y")%>)
+			</div>
+		</div>
+	</div>
+	<%end%>
+</div>
+<%else%>
+<p>No questions match search criteria</p>
+<%end%>
+
+<h3>Users</h3>
+<% if @users.any? %>
+<table class="table table-hover">
+	<% @users.in_groups_of(8).each do |user_group| %>
+	<tr>
+		<% user_group.each do |u| %>
+			<td><%= link_to u.username, user_path(u) if u != nil%></td>
+		<%end%>
+	</tr>
+	<% end %>
+</table>
+<%else%>
+<p>No users match search criteria</p>
+<%end%>

@@ -15,4 +15,5 @@ UPESite::Application.routes.draw do
   end
   resources :tags,      :only   => [:index,
                                     :show]
+match 'search' => "application#search"
 end

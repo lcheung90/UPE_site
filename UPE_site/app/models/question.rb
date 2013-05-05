@@ -5,4 +5,11 @@ class Question < ActiveRecord::Base
   has_many :taggings, :dependent => :destroy
   has_many :answers
   has_many :comments
+  def self.search(search)
+    if search
+      find(:all, :conditions => ['title LIKE ?', "%#{search}%"])
+    else
+      find(:all)
+    end
+  end
 end

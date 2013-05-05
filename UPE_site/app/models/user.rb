@@ -16,4 +16,11 @@ class User < ActiveRecord::Base
 	def to_param
 		username
 	end
+	def self.search(search)
+    if search
+      find(:all, :conditions => ['username LIKE ?', "%#{search}%"])
+    else
+      find(:all)
+    end
+  end
 end

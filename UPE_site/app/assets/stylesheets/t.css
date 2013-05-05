@@ -76,3 +76,13 @@ a.tag:focus {
   text-decoration: none;
   cursor: pointer;
 }
+.hud
+{
+	list-style-type: none;
+	margin:0px;
+}
+.hud>li
+{
+	float:left;
+	padding-right:10px;
+}
