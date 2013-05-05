@@ -1,28 +1,77 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Title:</b>
-  <%= @question.title %>
-</p>
+<h2><%=@question.title%></h2>
+<div class="row">
+  <div class="span1">
+    vote up
+    <br>
+    Score goes here
+    <br>
+    vote down
+  </div>
+  <div class = "row">
+    <div class="span11">
+      <%=@question.description%><ul class = "tags">
+        <% @tags.zip(@question.taggings).each do |tag,tagging|%>
+        <li class="badge badge-inverse">
+          <%= link_to tag.name, tag_path(tag.name),:class=>"tag"%>
+          <%=link_to "x", question_tagging_path(@question,tagging.id),:class=>"tag", :method => :delete if @question.user == @current_user%>
+        </li>
+        <%end%>
+      </ul>
 
-<p>
-  <b>Description:</b>
-  <%= @question.description %>
-</p>
-
-<p>
-  <b>Course level:</b>
-  <%= @question.course_level_id %>
-</p>
+      <% if @question.user == @current_user%>
+      <div class="span11-tag">
+        <%= form_for @tag, :url=> question_taggings_path(@question) do |t|%>
+        <%= t.text_field :name %>
+        <%= t.submit "Add tag", :class=>"btn-small"%>
+        <%end%>
+      </div>
+      <%end%>
+        <% if @current_user == @question.user%>
+        <div class ="span5-tag pull-left">
+          <%= link_to "edit", edit_question_path(params[:id], :user_id => @user)%>
+          <%= link_to "delete", question_path(params[:id]),:method=>:delete,:data=>{:confim=> 'Confirm question deletion. This action cannot be undone.'}%>
+        </div>
+        <%end%>
+        <div class="span5-tag pull-right">
+          Asked on <%=@question.created_at.strftime("%d %b %Y")%> at <%=@question.created_at.strftime("%I:%M:%S")%> 
+          <%=link_to @question.user.username, @question.user.username%>
+        </div>
+      </div>
+  </div>
+</div>
 <h2>Answers</h2>
 <%if @question.answers.any?%>
-	<% @question.answers.each do |a|%>
-		<p><%=a.solution%></p>
-	<%end%>
+<% @question.answers.each do |a|%>
+<div class="row">
+  <div class="span1">
+    vote up
+    <br>
+    Score goes here
+    <br>
+    vote down
+  </div>
+  <div class="row">
+    <div class="span11">
+      <%=a.solution%>
+      <% if @current_user == a.user%>
+      <div class ="row">
+        <div class="span5 pull-left">
+          <%= link_to "edit", edit_question_answer_path(@question,a)%>
+          <%= link_to "delete", question_answer_path(@question,a),:method=>:delete,:data=>{:confim=> 'Confirm bookmark deletion. This action cannot be undone.'}%>
+        </div>
+        <%end%>
+        <div class="span5 pull-right">
+         Posted on <%=a.created_at.strftime("%d %b %Y")%> at <%=a.created_at.strftime("%I:%M:%S")%> 
+         <%=link_to a.user.username, a.user.username%>
+       </div>
+     </div>
+   </div>
+ </div>
+</div>
 <%end%>
-<% if @current_user %>
-  <%= render :template => 'answers/new' %>
-  <%end%>
-
-<%= link_to 'Edit', edit_question_path(@question) %> |
-<%= link_to 'Back', questions_path %>
+<%end%>
+<% if @current_user && params[:controller] != "answers"%>
+<%= render :template => 'answers/new' %>
+<%end%>

@@ -1,27 +1,34 @@
 <h1>Listing questions</h1>
 
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Description</th>
-    <th>Course level</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @questions.each do |question| %>
-  <tr>
-    <td><%= question.title %></td>
-    <td><%= question.description %></td>
-    <td><%= question.course_level_id %></td>
-    <td><%= link_to 'Show', question %></td>
-    <td><%= link_to 'Edit', edit_question_path(question) %></td>
-    <td><%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Question', new_question_path %>
+<div class ="row">
+  <% @questions.each do |question| %>
+  <div class ="span1">
+    <%= question.score%>
+    hotness
+  </div>
+  <div class ="span1">
+    <%= question.answers.count%>
+    answers
+  </div>
+  <div class ="span1">
+     <%= question.view_count%>
+     views
+  </div>
+  <div class ="row">
+    <div class ="span9">
+      <%= link_to question[:title], question_path(question, :id =>question.id)%>
+      <ul class = "tags">
+        <% question.tags.order(:id).zip(question.taggings).each do |tag,tagging|%>
+          <li>
+            <%= link_to tag.name, tag_path(tag.name),:class => "badge badge-inverse"%>
+          </li>
+        <%end%>
+      </ul>
+      <div class ="span9 pull-right">
+    created by: <%=link_to question.user.username, user_path(question.user.username)%>
+      (<%=question.created_at.strftime("%d %b %Y")%>)
+    </div>
+    </div>
+  </div>
+  <%end%>
+</div>

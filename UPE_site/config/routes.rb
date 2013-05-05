@@ -10,5 +10,9 @@ UPESite::Application.routes.draw do
   resources :sessions
   resources :questions do
     resources :answers
+    resources :taggings, :only => [:create, 
+                                   :destroy]
   end
+  resources :tags,      :only   => [:index,
+                                    :show]
 end

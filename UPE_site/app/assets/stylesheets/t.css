@@ -39,3 +39,40 @@ body
 {
 width: 97%;
 }
+.tags
+{
+	list-style-type: none;
+	margin:0px;
+}
+.tags>li
+{
+	float:left;
+}
+.span11-tag
+{
+	margin:0px;
+	width: 860px;
+	padding-top: 5px;
+}
+.span5-tag
+{
+	width: 380px;
+	margin:0px;
+	padding-top: 10px;
+}
+.new_tag
+{
+	padding-top: 5px;
+}
+.tag
+{
+	color: white;
+	text-decoration: none;
+  cursor: pointer;
+}
+a.tag:hover,
+a.tag:focus {
+  color: #ffffff;
+  text-decoration: none;
+  cursor: pointer;
+}

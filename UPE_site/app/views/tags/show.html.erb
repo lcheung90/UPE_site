@@ -1,10 +1,12 @@
-<p id="notice"><%= notice %></p>
+<h1>Questions Tagged: <%= @tag.name %></h1>
 
-<p>
-  <b>Name:</b>
-  <%= @tag.name %>
-</p>
-
-
-<%= link_to 'Edit', edit_tag_path(@tag) %> |
-<%= link_to 'Back', tags_path %>
+<ul class="questions">
+  <% @questions.each do |question| %>
+    <li>
+      <h3><%= link_to question.title, question %></h3>
+      <% question.tags.each do |t| %>
+        <%= link_to t.name, t, :class => "badge badge-inverse" %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>

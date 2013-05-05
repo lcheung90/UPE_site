@@ -19,6 +19,9 @@
     <div class="control-group">
         <%= f.text_area :description, :rows => "10",:placeholder=> "Describe your problem here",:class=>"fill" %>
     </div>
+    <div class="control-group">
+        <%= f.text_field :score, :cols => 250,:placeholder => "Score",:class=>"fill" %>
+    </div>
     <div class="form-actions">
       <%= f.submit "Submit Question", :class=>"btn btn-primary" %>
       <%= f.submit "Cancel", :class=>"btn"%>

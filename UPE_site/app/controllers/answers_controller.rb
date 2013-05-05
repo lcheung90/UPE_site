@@ -34,7 +34,13 @@ class AnswersController < ApplicationController
 
   # GET /answers/1/edit
   def edit
-    @answer = Answer.find(params[:id])
+    @question = Question.find(params[:question_id])
+
+    if !@question
+      redirect_to :controller => :questions, :action => "show", :id => params[:question_id]
+    end
+
+    @answer = @question.answers.find(params[:id])
   end
 
   # POST /answers
@@ -62,12 +68,29 @@ class AnswersController < ApplicationController
   # PUT /answers/1
   # PUT /answers/1.json
   def update
-    @answer = Answer.find(params[:id])
+    @question = Question.find(params[:question_id])
 
+    if !@question
+      redirect_to :controller => :questions, :action => "show", :id => params[:question_id]
+    end
+    @tags = @question.tags.order(:id)
+    @tag = @question.tags.build
+    @taggings = Tagging.where(:tag_id => @tags.collect{|x| x.id},:question_id => params[:id]).order(:tag_id)
+    @answer = @question.answers.find(params[:id])
     respond_to do |format|
       if @answer.update_attributes(params[:answer])
-        format.html { redirect_to @answer, notice: 'Answer was successfully updated.' }
-        format.json { head :no_content }
+        # make other answers wrong
+        if params[:answer][:is_right]
+          @question.answers.each do |a|
+            if a != @answer
+              a.is_right = false
+              a.save
+            end
+          end
+        end
+        format.html { render :template => 'questions/show', :id => @question.id, notice: 'Answer was successfully updated.'}
+        #format.json { head :no_content }
+        #redirect_to question_url(@question_id)
       else
         format.html { render action: "edit" }
         format.json { render json: @answer.errors, status: :unprocessable_entity }
@@ -78,11 +101,18 @@ class AnswersController < ApplicationController
   # DELETE /answers/1
   # DELETE /answers/1.json
   def destroy
-    @answer = Answer.find(params[:id])
+    @question = Question.find(params[:question_id])
+
+    if !@question
+      redirect_to :controller => :questions, :action => "show", :id => params[:question_id]
+    end
+
+    @answer = @question.answers.find(params[:id])
+
     @answer.destroy
 
     respond_to do |format|
-      format.html { redirect_to answers_url }
+      format.html { redirect_to @question }
       format.json { head :no_content }
     end
   end
