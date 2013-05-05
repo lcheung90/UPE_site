@@ -95,7 +95,7 @@
                   <li><%= link_to "Tags", tags_path,:class=>"btn btn-large btn-primary"%></li>
                   <ul>
                     <%if @current_user%>
-                  <%= link_to "Ask Question", tags_path,:class=>"btn btn-large btn-primary pull-right"%>
+                  <%= link_to "Ask Question", new_question_path(params[:id],:user_id => @user),:class=>"btn btn-large btn-primary pull-right"%>
                   <%end%>
                 </div>
                 <%end%>

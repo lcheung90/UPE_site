@@ -3,7 +3,7 @@ class Question < ActiveRecord::Base
   belongs_to :user
   has_many :tags, :through =>:taggings ,:uniq => true
   has_many :taggings, :dependent => :destroy
-  has_many :answers
+  has_many :answers, :dependent => :destroy
   has_many :comments
   def self.search(search)
     if search
