@@ -51,6 +51,20 @@
     Score goes here
     <br>
     vote down
+    <% if @current_user ==@question.user %>
+          <% if a.correct %>
+            <% btn_txt = "Chosen Answer" %>
+            <% btn_class = "answerButton btn btn-small btn-success disabled hidden" %>
+          <% else %>
+            <% btn_txt = "Select Answer" %>
+            <% btn_class = "answerButton btn btn-small btn-success" %>
+          <% end %>
+          <%= link_to btn_txt, 
+              question_answer_path(@question, a, :answer => {:correct => true}, :format => "json"), 
+              :method => :put,
+              :remote => :true, 
+              :class => btn_class %>
+        <% end %>
   </div>
   <div class="row">
     <div class="span11">
@@ -59,7 +73,7 @@
       <div class ="row">
         <div class="span5 pull-left">
           <%= link_to "edit", edit_question_answer_path(@question,a)%>
-          <%= link_to "delete", question_answer_path(@question,a),:method=>:delete,:data=>{:confim=> 'Confirm bookmark deletion. This action cannot be undone.'}%>
+          <%= link_to "delete", question_answer_path(@question,a),:method=>:delete,:confirm=> 'Confirm question deletion. This action cannot be undone.'%>
         </div>
         <%end%>
         <div class="span5 pull-right">
@@ -72,6 +86,18 @@
 </div>
 <%end%>
 <%end%>
+<%= javascript_tag do %>
+    $(".answerButton").bind("ajax:complete", function(et, e, s){
+      if(s == "success") {
+        $(".answerButton").text("Select Answer").removeClass("disabled hidden");
+        $(".answerButton").show();
+        $(".answerButton").parent('li').removeClass("alert alert-success");
+
+        $(this).text("Chosen Answer").addClass("disabled").hide();
+        $(this).parent('li').addClass("alert alert-success");
+      }
+    });
+  <% end %>
 <% if @current_user && params[:controller] != "answers"%>
 <%= render :template => 'answers/new' %>
 <%end%>

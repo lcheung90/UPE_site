@@ -80,10 +80,10 @@ class AnswersController < ApplicationController
     respond_to do |format|
       if @answer.update_attributes(params[:answer])
         # make other answers wrong
-        if params[:answer][:is_right]
+        if params[:answer][:correct]
           @question.answers.each do |a|
             if a != @answer
-              a.is_right = false
+              a.correct = false
               a.save
             end
           end

@@ -1,6 +1,16 @@
 class QuestionsController < ApplicationController
   def index
-    @questions = Question.all
+    if params[:unanswered]
+      @questions = Question.includes("answers").where(answers: {question_id: nil}).order("questions.created_at DESC")
+    else
+      @questions = Question.order("created_at DESC")
+    end
+    @tags = Tag.order("name")
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @questions }
+    end
   end
 
   def show

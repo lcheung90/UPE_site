@@ -91,7 +91,7 @@
                   <div class="span11">
                   <ul class = "hud">
                   <li><%= link_to "Questions", questions_path,:class=>"btn btn-large btn-primary"%></li>
-                  <li><%= link_to "Unanswered", questions_path,:class=>"btn btn-large btn-primary"%></li>
+                  <li><%= link_to "Unanswered", questions_path(:unanswered => true),:class=>"btn btn-large btn-primary"%></li>
                   <li><%= link_to "Tags", tags_path,:class=>"btn btn-large btn-primary"%></li>
                   <ul>
                     <%if @current_user%>

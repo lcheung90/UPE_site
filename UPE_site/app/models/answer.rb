@@ -1,5 +1,5 @@
 class Answer < ActiveRecord::Base
-  attr_accessible :solution
+  attr_accessible :solution, :correct
   belongs_to :user
   belongs_to :question
   has_many :comments
