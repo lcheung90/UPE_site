@@ -1,21 +1,22 @@
-<h1>Listing questions</h1>
+<h3>All Questions</h3>
 
 <div class ="row">
   <% @questions.each do |question| %>
   <div class ="span1">
-    hotness
+    <p class= "score-mini"><%= question.plusminus%></p>
+    <p class= "stat">hotness<p>
   </div>
   <div class ="span1">
-    <%= question.answers.count%>
-    answers
+    <p class= "score-mini"><%= question.answers.count%></p>
+    <p class= "stat">answers</p>
   </div>
   <div class ="span1">
-     <%= question.view_count%>
-     views
+     <p class= "score-mini"><%= question.view_count%></p>
+     <p class= "stat">views</p>
   </div>
   <div class ="row">
     <div class ="span9">
-      <%= link_to question[:title], question_path(question, :id =>question.id)%>
+      <p class="title-mini"><%= link_to question[:title], question_path(question, :id =>question.id)%></p>
       <ul class = "tags">
         <% question.tags.order(:id).zip(question.taggings).each do |tag,tagging|%>
           <li>
@@ -23,9 +24,12 @@
           </li>
         <%end%>
       </ul>
-      <div class ="span9 pull-right">
-    created by: <%=link_to question.user.username, user_path(question.user.username)%>
-      (<%=question.created_at.strftime("%d %b %Y")%>)
+      <div class ="span9 pull-right tstamp">
+    <p "tstamp">created by: <%=link_to question.user.username, user_path(question.user.username)%>
+      <%if question.user.tutor%>
+        <span class ="label label-important">tutor</span>
+      <%end%>
+      (<%=question.created_at.strftime("%d %b %Y")%>)</p>
     </div>
     </div>
   </div>

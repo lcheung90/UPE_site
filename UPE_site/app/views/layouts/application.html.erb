@@ -67,48 +67,33 @@
                   <%= u.submit "Log in", :class => "btn-primary pull-right"%>
                   <%end%>
                 </div>
-
-                            <!--
-                            <div class="dropdown-menu">
-                                <%= form_tag sessions_path do %>
-                                <p class ="login"><%= text_field_tag :username,nil,:placeholder => "Username" %></p>
-                                <p class ="login"><%= password_field_tag :password_digest,nil,:placeholder => "Password" %></p>
-                                <p class ="login"><a href ="#">Forgot password</a>
-                                <p class ="login"><%= submit_tag "Login", :class => "btn-primary pull-right" %></p>
-                                <%end%>
-                            </div>
-                          -->
-                        </li>
-                        <%end%>
-                      </ul>
-                    </div>
-                  </section>
-                </div>
-              </div>
-              <section class = "container">
-                <% if params[:action] != "home"%>
-                <div class="row">
-                  <div class="span11">
-                  <ul class = "hud">
-                  <li><%= link_to "Questions", questions_path,:class=>"btn btn-large btn-primary"%></li>
-                  <li><%= link_to "Unanswered", questions_path(:unanswered => true),:class=>"btn btn-large btn-primary"%></li>
-                  <li><%= link_to "Tags", tags_path,:class=>"btn btn-large btn-primary"%></li>
-                  <ul>
-                    <%if @current_user%>
-                  <%= link_to "Ask Question", new_question_path(params[:id],:user_id => @user),:class=>"btn btn-large btn-primary pull-right"%>
-                  <%end%>
-                </div>
-                <%end%>
-              </div>
-                <div>
-                  <p class="flash">
-                    <%=flash[:notice] %>
-                  </p>
-                </div>
-                <%=params.inspect%>
-                <%= yield %>
-              </section>
-              <%= javascript_include_tag "application" %>
-              <%= javascript_include_tag "bootstrap" %>
-            </body>
-            </html>
+              </li>
+              <%end%>
+            </ul>
+          </div>
+        </section>
+      </div>
+    </div>
+    <section class = "container">
+      <%= render 'layouts/flash_messages' %>
+      <% if params[:action] != "home"%>
+      <div class="row">
+        <div class="span11">
+          <ul class = "hud">
+            <li><%= link_to "Questions", questions_path,:class=>"btn btn-large btn-primary"%></li>
+            <li><%= link_to "Unanswered", questions_path(:unanswered => true),:class=>"btn btn-large btn-primary"%></li>
+            <li><%= link_to "Tags", tags_path,:class=>"btn btn-large btn-primary"%></li>
+            <ul>
+              <%if @current_user%>
+              <%= link_to "Ask Question", new_question_path(params[:id],:user_id => @user),:class=>"btn btn-large btn-primary pull-right"%>
+              <%end%>
+            </div>
+            <%end%>
+          </div>
+          
+          <%= yield %>
+        </section>
+        <%= javascript_include_tag "application" %>
+        <%= javascript_include_tag "bootstrap" %>
+      </body>
+      </html>

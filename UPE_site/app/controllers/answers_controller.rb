@@ -116,4 +116,34 @@ class AnswersController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def answer_vote_up
+    user = User.find_by_id(params[:user_id])
+    question = Question.find_by_id(params[:question_id])
+    answer = Answer.find_by_id(params[:answer_id])
+    if user.voted_against?(answer)
+    user.unvote_for(answer)
+    elsif user.voted_for?(answer)
+    redirect_to question_url(question) and return
+    else
+    user.vote_for(answer)
+    end
+    redirect_to question_url(question)
+  end
+
+  def answer_vote_down
+    user = User.find_by_id(params[:user_id])
+    question = Question.find_by_id(params[:question_id])
+    answer = Answer.find_by_id(params[:answer_id])
+    if user.voted_for?(answer)
+      user.unvote_for(answer)
+    elsif user.voted_against?(answer)
+    redirect_to question_url(question) and return
+    else
+    user.vote_against(answer)
+    end
+    redirect_to question_url(question)
+  end
+
+
 end

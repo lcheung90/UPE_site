@@ -1,17 +1,14 @@
-<p id="notice"><%= notice %></p>
-
-<h2><%=@question.title%></h2>
 <div class="row">
-  <div class="span1">
-    vote up
-    <br>
-    Score goes here
-    <br>
-    vote down
+  <h1><%=@question.title%></h1>
+  <div class="span1 micro">
+    <%=link_to image_tag('arrow_up.png'), {:controller=>"questions", :action=>"question_vote_up", :user_id=>@user.id, :question_id=>@question.id}%>
+    <p class="score"><%=@score%></p>
+    <%=link_to image_tag('arrow_down.png'), {:controller=>"questions", :action=>"question_vote_down", :user_id=>@user.id, :question_id=>@question.id}%>
   </div>
   <div class = "row">
-    <div class="span11">
-      <%=@question.description%><ul class = "tags">
+    <div class="span11 micro">
+      <%=@question.description%>
+      <ul class = "tags">
         <% @tags.zip(@question.taggings).each do |tag,tagging|%>
         <li class="badge badge-inverse">
           <%= link_to tag.name, tag_path(tag.name),:class=>"tag"%>
@@ -28,82 +25,89 @@
         <%end%>
       </div>
       <%end%>
+      <div class="row tstamp">
+        Asked on <%=@question.created_at.strftime("%d %b %Y")%> at <%=@question.created_at.strftime("%I:%M:%S")%>
+      </div>
+      <div class="row">
         <% if @current_user == @question.user%>
         <div class ="span5-tag pull-left">
           <%= link_to "edit", edit_question_path(params[:id], :user_id => @user)%>
           <%= link_to "delete", question_path(params[:id]),:method=>:delete,:data=>{:confim=> 'Confirm question deletion. This action cannot be undone.'}%>
         </div>
         <%end%>
-        <div class="span5-tag pull-right">
-          Asked on <%=@question.created_at.strftime("%d %b %Y")%> at <%=@question.created_at.strftime("%I:%M:%S")%> <br>
+        <div class="span5-tag pull-right tstamp">
           <%=link_to @question.user.username, user_path(@question.user.username)%>
           <%if @question.user.tutor%>
-           <span class ="label label-important">tutor</span>
+          <span class ="label label-important">tutor</span>
           <%end%>
         </div>
       </div>
+    </div>
   </div>
-</div>
-<h2>Answers</h2>
-<%if @question.answers.any?%>
-<% @question.answers.each do |a|%>
-<div class="row">
-  <div class="span1">
-    vote up
-    <br>
-    Score goes here
-    <br>
-    vote down
+  <h3>Answers</h3>
+  <%if @question.answers.any?%>
+  <% @question.answers.each do |a|%>
+
+  <div class="span1 micro">
+    <%=link_to image_tag('arrow_up.png'), {:controller=>"answers", :action=>"answer_vote_up", :user_id=>@user.id, :question_id=>@question.id, :answer_id=>a.id}%>
+    <p class="score"><%=a.plusminus%></p>
+    <%=link_to image_tag('arrow_down.png'), {:controller=>"answers", :action=>"answer_vote_down", :user_id=>@user.id, :question_id=>@question.id, :answer_id=>a.id}%>
     <% if @current_user ==@question.user %>
-          <% if a.correct %>
-            <% btn_txt = "Chosen Answer" %>
-            <% btn_class = "answerButton btn btn-small btn-success disabled hidden" %>
-          <% else %>
-            <% btn_txt = "Select Answer" %>
-            <% btn_class = "answerButton btn btn-small btn-success" %>
-          <% end %>
-          <%= link_to btn_txt, 
-              question_answer_path(@question, a, :answer => {:correct => true}, :format => "json"), 
-              :method => :put,
-              :remote => :true, 
-              :class => btn_class %>
-        <% end %>
+    <% if a.correct %>
+    <% btn_txt = "Chosen Answer" %>
+    <% btn_class = "answerButton badge badge-important disabled hidden" %>
+    <% else %>
+    <% btn_txt = "Select Answer" %>
+    <% btn_class = "answerButton badge badge-success" %>
+    <% end %>
+    <%= link_to btn_txt, 
+    question_answer_path(@question, a, :answer => {:correct => true}, :format => "json"), 
+    :method => :put,
+    :remote => :true, 
+    :class => btn_class %>
+    <% end %>
   </div>
   <div class="row">
-    <div class="span11">
+    <div class="span11 micro">
       <%=a.solution%>
-      <% if @current_user == a.user%>
-      <div class ="row">
+      <div class ="row tstamp">
+        <p>Posted on <%=a.created_at.strftime("%d %b %Y")%> at <%=a.created_at.strftime("%I:%M:%S")%></p>
+      </div>
+      <div class="row">
+        <% if @current_user == a.user%>
         <div class="span5 pull-left">
           <%= link_to "edit", edit_question_answer_path(@question,a)%>
-          <%= link_to "delete", question_answer_path(@question,a),:method=>:delete,:confirm=> 'Confirm question deletion. This action cannot be undone.'%>
+          <%= link_to "delete", question_answer_path(@question,a),:method=>:delete,:confirm=> 'Confirm answer deletion. This action cannot be undone.'%>
         </div>
         <%end%>
-        <div class="span5 pull-right">
-         Posted on <%=a.created_at.strftime("%d %b %Y")%> at <%=a.created_at.strftime("%I:%M:%S")%> <br>
-         <%=link_to a.user.username, user_path(a.user.username)%>
-         <%if a.user.tutor%>
-         <span class ="label label-important">tutor</span>
-         <%end%>
-       </div>
-     </div>
-   </div>
- </div>
-</div>
-<%end%>
-<%end%>
-<%= javascript_tag do %>
-    $(".answerButton").bind("ajax:complete", function(et, e, s){
-      if(s == "success") {
-        $(".answerButton").text("Select Answer").removeClass("disabled hidden");
-        $(".answerButton").show();
-        $(".answerButton").parent('li').removeClass("alert alert-success");
+        <div class="span5 pull-right tstamp">
+          <%=link_to a.user.username, user_path(a.user.username)%>
+          <%if a.user.tutor%>
+          <span class ="label label-important">tutor</span>
+          <%end%>
+        </div>
+      </div>
+    </div>
+  </div>
 
-        $(this).text("Chosen Answer").addClass("disabled").hide();
-        $(this).parent('li').addClass("alert alert-success");
-      }
-    });
-  <% end %>
+  <%end%>
+  <%end%>
+  <%= javascript_tag do %>
+  $(".answerButton").bind("ajax:complete", function(et, e, s){
+  if(s == "success") {
+  $(".answerButton").text("Select Answer").removeClass("disabled hidden");
+  $(".answerButton").show();
+  $(".answerButton").parent('li').removeClass("alert alert-success");
+
+  $(this).text("Chosen Answer").addClass("disabled").hide();
+  $(this).parent('li').addClass("alert alert-success");
+}
+});
+<% end %>
+<br>
+<br>
+<br>
 <% if @current_user && params[:controller] != "answers"%>
 <%= render :template => 'answers/new' %>
 <%end%>
+</div>

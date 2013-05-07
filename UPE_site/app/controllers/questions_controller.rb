@@ -21,6 +21,7 @@ class QuestionsController < ApplicationController
     @tags = @question.tags.order(:id)
     @tag = @question.tags.build
     @taggings = Tagging.where(:tag_id => @tags.collect{|x| x.id},:question_id => params[:id]).order(:tag_id)
+    @score = @question.plusminus
   end
 
   def new
@@ -61,5 +62,31 @@ class QuestionsController < ApplicationController
     else
       render action: "show"
     end
+  end
+
+  def question_vote_up
+    user = User.find_by_id(params[:user_id])
+    question = Question.find_by_id(params[:question_id])
+    if user.voted_against?(question)
+    user.unvote_for(question)
+    elsif user.voted_for?(question)
+    redirect_to question_url(question) and return
+    else
+    user.vote_for(question)
+    end
+    redirect_to question_url(question)
+  end
+
+  def question_vote_down
+    user = User.find_by_id(params[:user_id])
+    question = Question.find_by_id(params[:question_id])
+    if user.voted_for?(question)
+      user.unvote_for(question)
+    elsif user.voted_against?(question)
+    redirect_to question_url(question) and return
+    else
+    user.vote_against(question)
+    end
+    redirect_to question_url(question)
   end
 end

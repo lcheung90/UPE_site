@@ -17,35 +17,39 @@
 <h3>Questions</h3>
 <%if @questions.any?%>
 <div class ="row">
-	<% @questions.each do |question| %>
-	<div class ="span1">
-		hotness
-	</div>
-	<div class ="span1">
-		<%= question.answers.count%>
-		answers
-	</div>
-	<div class ="span1">
-		<%= question.view_count%>
-		views
-	</div>
-	<div class ="row">
-		<div class ="span9">
-			<%= link_to question[:title], question_path(question, :id =>question.id)%>
-			<ul class = "tags">
-				<% question.tags.order(:id).zip(question.taggings).each do |tag,tagging|%>
-				<li>
-					<%= link_to tag.name, tag_path(tag.name),:class => "badge badge-inverse"%>
-				</li>
-				<%end%>
-			</ul>
-			<div class ="span9 pull-right">
-				created by: <%=link_to question.user.username, user_path(question.user.username)%>
-				(<%=question.created_at.strftime("%d %b %Y")%>)
-			</div>
-		</div>
-	</div>
-	<%end%>
+  <% @questions.each do |question| %>
+  <div class ="span1">
+    <p class= "score-mini"><%= question.plusminus%></p>
+    <p class= "stat">hotness<p>
+  </div>
+  <div class ="span1">
+    <p class= "score-mini"><%= question.answers.count%></p>
+    <p class= "stat">answers</p>
+  </div>
+  <div class ="span1">
+     <p class= "score-mini"><%= question.view_count%></p>
+     <p class= "stat">views</p>
+  </div>
+  <div class ="row">
+    <div class ="span9">
+      <p class="title-mini"><%= link_to question[:title], question_path(question, :id =>question.id)%></p>
+      <ul class = "tags">
+        <% question.tags.order(:id).zip(question.taggings).each do |tag,tagging|%>
+          <li>
+            <%= link_to tag.name, tag_path(tag.name),:class => "badge badge-inverse"%>
+          </li>
+        <%end%>
+      </ul>
+      <div class ="span9 pull-right tstamp">
+    <p "tstamp">created by: <%=link_to question.user.username, user_path(question.user.username)%>
+      <%if question.user.tutor%>
+        <span class ="label label-important">tutor</span>
+      <%end%>
+      (<%=question.created_at.strftime("%d %b %Y")%>)</p>
+    </div>
+    </div>
+  </div>
+  <%end%>
 </div>
 <%else%>
 <p>No questions match search criteria</p>
@@ -57,7 +61,14 @@
 	<% @users.in_groups_of(8).each do |user_group| %>
 	<tr>
 		<% user_group.each do |u| %>
-			<td><%= link_to u.username, user_path(u) if u != nil%></td>
+			<td>
+				<%if u != nil%>
+					<%= link_to u.username, user_path(u)%>
+					<%if u.tutor%>
+			        	<span class ="label label-important">tutor</span>
+			      	<%end%>
+			      	<%end%>
+			</td>
 		<%end%>
 	</tr>
 	<% end %>

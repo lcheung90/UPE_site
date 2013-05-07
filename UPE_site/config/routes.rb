@@ -19,4 +19,8 @@ match 'search' => "application#search"
 match 'set_tutor' => 'users#set_tutor'
 match 'set_admin' => 'users#set_admin'
 match 'revoke_tutor' =>'users#revoke_tutor'
+match 'question_vote_up' =>'questions#question_vote_up'
+match 'question_vote_down' =>'questions#question_vote_down'
+match 'answer_vote_up' =>'answers#answer_vote_up'
+match 'answer_vote_down' =>'answers#answer_vote_down'
 end

@@ -12,10 +12,10 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :solution %><br />
     <%= f.text_area :solution, :rows => "10",:placeholder=> "Write your solution here",:class=>"fill"%>
   </div>
+  <br>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Post solution",:class=>"btn btn-primary"%>
   </div>
 <% end %>

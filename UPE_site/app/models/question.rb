@@ -5,6 +5,7 @@ class Question < ActiveRecord::Base
   has_many :taggings, :dependent => :destroy
   has_many :answers, :dependent => :destroy
   has_many :comments
+  acts_as_voteable
   def self.search(search)
     if search
       find(:all, :conditions => ['title LIKE ?', "%#{search}%"])

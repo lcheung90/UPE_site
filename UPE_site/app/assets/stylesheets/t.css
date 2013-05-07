@@ -86,3 +86,37 @@ a.tag:focus {
 	float:left;
 	padding-right:10px;
 }
+.micro
+{
+	padding-top: 30px;
+}
+.tstamp
+{
+	text-align: right;
+}
+.score
+{
+	font-weight: bolder;
+	text-align: center;
+	font-size: 35px;
+	padding-top: 10px;
+}
+.score-mini
+{
+	text-align: center;
+	font-weight: bold;
+	font-size: 16px;
+	margin:0px;
+}
+.stat
+{
+	text-align: center;
+	font-weight: bolder;
+	padding-top: 0px;
+}
+.title-mini
+{
+	font-weight: bold;
+	font-size:20px;
+	margin:0px;
+}
