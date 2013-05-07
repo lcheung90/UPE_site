@@ -16,4 +16,7 @@ UPESite::Application.routes.draw do
   resources :tags,      :only   => [:index,
                                     :show]
 match 'search' => "application#search"
+match 'set_tutor' => 'users#set_tutor'
+match 'set_admin' => 'users#set_admin'
+match 'revoke_tutor' =>'users#revoke_tutor'
 end

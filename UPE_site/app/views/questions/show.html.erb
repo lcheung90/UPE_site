@@ -35,8 +35,11 @@
         </div>
         <%end%>
         <div class="span5-tag pull-right">
-          Asked on <%=@question.created_at.strftime("%d %b %Y")%> at <%=@question.created_at.strftime("%I:%M:%S")%> 
-          <%=link_to @question.user.username, @question.user.username%>
+          Asked on <%=@question.created_at.strftime("%d %b %Y")%> at <%=@question.created_at.strftime("%I:%M:%S")%> <br>
+          <%=link_to @question.user.username, user_path(@question.user.username)%>
+          <%if @question.user.tutor%>
+           <span class ="label label-important">tutor</span>
+          <%end%>
         </div>
       </div>
   </div>
@@ -77,8 +80,11 @@
         </div>
         <%end%>
         <div class="span5 pull-right">
-         Posted on <%=a.created_at.strftime("%d %b %Y")%> at <%=a.created_at.strftime("%I:%M:%S")%> 
-         <%=link_to a.user.username, a.user.username%>
+         Posted on <%=a.created_at.strftime("%d %b %Y")%> at <%=a.created_at.strftime("%I:%M:%S")%> <br>
+         <%=link_to a.user.username, user_path(a.user.username)%>
+         <%if a.user.tutor%>
+         <span class ="label label-important">tutor</span>
+         <%end%>
        </div>
      </div>
    </div>

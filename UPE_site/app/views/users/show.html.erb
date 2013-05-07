@@ -1,10 +1,10 @@
 <p id="notice"><%= notice %></p>
-<h1><%= @current_user.username%></h1>
+<h1><%= @user.username%></h1>
 <div class="row">
   <div class="span12">
     <div class="row">
       <!--<div class="span3"><img src="img/key_vectorized.png"></div>-->
-      <div class="span9">
+      <div class="span3">
         <p>
           <b>Name:</b>
           <%= @user.name %>
@@ -13,11 +13,38 @@
           <b>Email:</b>
           <%= @user.email %>
         </p>
+        <% if @user.tutor || @user.admin%>
+        <ul class="hud">
+          <% if @user.tutor%>
+          <li><p class="label label-important">tutor</p></li>
+          <%end%>
+          <% if @user.admin%>
+          <li><p class="label label-important">admin</p></li>
+          <%end%>
+        </ul>
+        <%end%>
+        <%=link_to "Edit Profile", edit_user_path(@user), :class=>"badge badge-inverse pull-right" if @current_user == @user%>
       </div>
+      <%if @current_user.admin && @current_user != @user%>
+      <div class = "span9">
+        <%if !@user.admin %>
+        <%=link_to "Transfer admin rights",{:controller => "users", :action => "set_admin", :id=>@user.username,:admin=>true},:class=>"btn btn-success"%>
+        <%end%>
+        <%if !@user.tutor%>
+        <%=link_to "Turn into tutor",{:controller => "users", :action => "set_tutor", :id=>@user.username,:tutor=>true},:class=>"btn btn-inverse"%>
+        <%else%>
+        <%=link_to "Revoke tutor membership",{:controller => "users", :action => "revoke_tutor", :id=>@user.username,:tutor=>false},:class=>"btn btn-primary"%>
+        <%end%>
+      </div>
+      <%end%>
     </div>
     <div class ="row">
       <div class="span6">
+        <% if @current_user == @user%>
         <h2>My Questions</h2>
+        <%else%>
+        <h2><%=@user.username%>'s Questions</h2>
+        <%end%>
         <%if @questions.any?%>
         <% @questions.each do |entry| %>
         <section>
@@ -29,7 +56,11 @@
         <%end%>
       </div>
       <div class="span6">
-        <h2>My Answers</h2>
+        <% if @current_user == @user%>
+        <h2>My Answerss</h2>
+        <%else%>
+        <h2><%=@user.username%>'s Answers</h2>
+        <%end%>
         <% if @user.answers.any? %>
         <ul>
           <% @user.answers.each do |a| %>

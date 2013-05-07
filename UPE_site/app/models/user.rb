@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
 	has_many :questions
 	has_many :answers
 	has_many :comments
-	attr_accessible :email, :name, :password, :username
+	attr_accessible :email, :name, :password, :username, :tutor,:admin
 
 	def to_param
 		username
