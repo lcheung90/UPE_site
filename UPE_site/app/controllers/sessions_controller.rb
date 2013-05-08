@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
       session[:user_id] = @user.id
       redirect_to @user, :notice => "Logged in!"
     else
-      flash.now[:notice] = "Invalid email or password"
+      flash.now[:notice] = "Invalid username or password"
       render "public_pages/home"
     end
   end

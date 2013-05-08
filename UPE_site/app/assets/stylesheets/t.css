@@ -43,6 +43,7 @@ width: 97%;
 {
 	list-style-type: none;
 	margin:0px;
+	margin-top:5px;
 }
 .tags>li
 {
@@ -80,6 +81,7 @@ a.tag:focus {
 {
 	list-style-type: none;
 	margin:0px;
+	margin-bottom: 10px;
 }
 .hud>li
 {

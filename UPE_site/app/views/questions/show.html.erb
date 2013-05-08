@@ -20,15 +20,15 @@
       <% if @question.user == @current_user%>
       <div class="span11-tag">
         <%= form_for @tag, :url=> question_taggings_path(@question) do |t|%>
-        <%= t.text_field :name %>
-        <%= t.submit "Add tag", :class=>"btn-small"%>
+        <%= t.submit "Add tag", :class=>"btn-small pull-right"%>
+        <%= t.text_field :name, :class=>"pull-right" %>
         <%end%>
       </div>
       <%end%>
       <div class="row tstamp">
         Asked on <%=@question.created_at.strftime("%d %b %Y")%> at <%=@question.created_at.strftime("%I:%M:%S")%>
       </div>
-      <div class="row">
+      
         <% if @current_user == @question.user%>
         <div class ="span5-tag pull-left">
           <%= link_to "edit", edit_question_path(params[:id], :user_id => @user)%>
@@ -41,7 +41,7 @@
           <span class ="label label-important">tutor</span>
           <%end%>
         </div>
-      </div>
+      
     </div>
   </div>
   <h3>Answers</h3>

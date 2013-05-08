@@ -77,6 +77,7 @@ class AnswersController < ApplicationController
     @tag = @question.tags.build
     @taggings = Tagging.where(:tag_id => @tags.collect{|x| x.id},:question_id => params[:id]).order(:tag_id)
     @answer = @question.answers.find(params[:id])
+    @user = @answer.user
     respond_to do |format|
       if @answer.update_attributes(params[:answer])
         # make other answers wrong
@@ -88,7 +89,7 @@ class AnswersController < ApplicationController
             end
           end
         end
-        format.html { render :template => 'questions/show', :id => @question.id, notice: 'Answer was successfully updated.'}
+        format.html { render :template => 'questions/show', :answer_id=>@answer.id, :user_id=>@user.id,:question_id => @question.id, notice: 'Answer was successfully updated.'}
         #format.json { head :no_content }
         #redirect_to question_url(@question_id)
       else

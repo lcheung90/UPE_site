@@ -58,7 +58,7 @@ class UsersController < ApplicationController
    if @current_user.admin
     @user = User.find_by_username(params[:id])
       if @user.update_attribute(:tutor,params[:tutor])
-        flash[:notice] = "The user "+@user.username+" has become a tutor"
+        flash[:notice] = "The user "+@user.username+" is no longer a tutor"
       else
         flash[:notice] = "The user "+@user.username+" does not qualify as a tutor"
       end

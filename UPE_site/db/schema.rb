@@ -22,14 +22,6 @@ ActiveRecord::Schema.define(:version => 20130507072633) do
     t.boolean  "correct"
   end
 
-  create_table "comments", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "answer_id"
-    t.integer  "opinion_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "questions", :force => true do |t|
     t.string   "title"
     t.text     "description"
@@ -38,13 +30,6 @@ ActiveRecord::Schema.define(:version => 20130507072633) do
     t.datetime "updated_at",      :null => false
     t.integer  "user_id"
     t.integer  "view_count"
-  end
-
-  create_table "ratings", :force => true do |t|
-    t.integer  "score"
-    t.integer  "answer_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
   end
 
   create_table "taggings", :force => true do |t|

@@ -23,7 +23,7 @@
         <%end%>
 
         <div class="nav-collapse collapse" id="main-menu">
-          <ul class="nav" id="main-menu-left">
+          <!--<ul class="nav" id="main-menu-left">
             <li>
               <a>About</a>
             </li>
@@ -40,7 +40,7 @@
             <li>
               <a>Events</a>
             </li>
-          </ul>
+          </ul>-->
 
           <ul class="nav pull-right" id="main-menu-right">
             <li>
@@ -76,7 +76,7 @@
     </div>
     <section class = "container">
       <%= render 'layouts/flash_messages' %>
-      <% if params[:action] != "home"%>
+      <% if params[:action] != "home" && params[:action] != "new"%>
       <div class="row">
         <div class="span11">
           <ul class = "hud">

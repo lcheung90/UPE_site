@@ -1,19 +1,7 @@
-<h1>Listing tags</h1>
-
-<table>
-  <tr>
-    <th>Name</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<h1>Tag Cloud</h1>
 
 <% @tags.each do |tag| %>
-  <tr>
-    <td><%= tag.name %></td>
-    <td><%= link_to 'Show', tag %></td>
-  </tr>
+    <%= link_to tag.name, tag ,:class=>"badge badge-inverse score-mini"%>
 <% end %>
-</table>
 
 

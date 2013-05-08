@@ -8,7 +8,7 @@ class TaggingsController < ApplicationController
     @tagging.tag_id = @tag.id
 
     if @tagging.save
-      flash[:notice] = "Tag "+@tagging.tag.name+" successfully created"
+      flash[:notice] = "Tag "+@tagging.tag.name+" successfully added"
       redirect_to question_url(@tagging[:question_id])
     else
       flash[:notice] = "Unable to create "+ params[:tag][:name]+" tag"

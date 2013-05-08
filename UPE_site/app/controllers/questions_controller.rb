@@ -48,7 +48,7 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
     if @question.update_attributes(params[:question])
       flash[:notice] = "Question sucessfully updated"
-      redirect_to questions_url(params[:id])
+      redirect_to question_url(params[:id])
     else
       render action: "edit"
     end

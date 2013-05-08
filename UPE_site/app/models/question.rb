@@ -5,6 +5,8 @@ class Question < ActiveRecord::Base
   has_many :taggings, :dependent => :destroy
   has_many :answers, :dependent => :destroy
   has_many :comments
+  validates :description ,:presence => true
+  validates :title, :presence => true, :uniqueness=>true
   acts_as_voteable
   def self.search(search)
     if search
